@@ -1,59 +1,79 @@
 package com.llg.lqs.model;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.util.Date;
+
+@Data
 @Document(indexName = "literature")
 public class Literature {
 
     @Id
     private String id;
 
-    private String name;
+    private String ltName;
 
-    private String type;
+    private String ltType;
 
-    private String content;
+    private String ltRange;
 
-    public String getId() {
-        return id;
-    }
+    private String ltReadability;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    private Date publicationTime;
 
-    public String getName() {
-        return name;
-    }
+    private String country;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String unit;
 
-    public String getType() {
-        return type;
-    }
+    private String unitCategory;
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    private String doi;
 
-    public String getContent() {
-        return content;
-    }
+    private String authors;
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    private String project;
+
+    private String journals;
+
+    private Integer referenceAmount;
+
+    private Integer recommendedAmount;
+
+    private Integer sharedAmount;
+
+    private Integer readedAmount;
+
+    private String imgUr;
+
+    private String ltDescrib;
+
+    private String comments;
 
     @Override
     public String toString() {
         return "Literature{" +
                 "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", content='" + content + '\'' +
+                ", ltName='" + ltName + '\'' +
+                ", ltType='" + ltType + '\'' +
+                ", ltRange='" + ltRange + '\'' +
+                ", ltReadability='" + ltReadability + '\'' +
+                ", publicationTime=" + publicationTime +
+                ", country='" + country + '\'' +
+                ", unit='" + unit + '\'' +
+                ", unitCategory='" + unitCategory + '\'' +
+                ", doi='" + doi + '\'' +
+                ", authors='" + authors + '\'' +
+                ", project='" + project + '\'' +
+                ", journals='" + journals + '\'' +
+                ", referenceAmount=" + referenceAmount +
+                ", recommendedAmount=" + recommendedAmount +
+                ", sharedAmount=" + sharedAmount +
+                ", readedAmount=" + readedAmount +
+                ", imgUr='" + imgUr + '\'' +
+                ", ltDescrib='" + ltDescrib + '\'' +
+                ", comments='" + comments + '\'' +
                 '}';
     }
 }

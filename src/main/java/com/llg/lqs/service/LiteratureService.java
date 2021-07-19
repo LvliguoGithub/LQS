@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface LiteratureService {
 
-    Page<Literature> findByContent(String content, Pageable pageable);
+    Page<Literature> findByAny(String content, Pageable pageable);
+
+    Page<Literature> findAll(Pageable pageable);
 }

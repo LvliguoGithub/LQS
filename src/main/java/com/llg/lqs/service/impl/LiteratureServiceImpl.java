@@ -15,7 +15,12 @@ public class LiteratureServiceImpl implements LiteratureService {
     private LiteratureRepository literatureRepository;
 
     @Override
-    public Page<Literature> findByContent(String content, Pageable pageable) {
-        return literatureRepository.findByContent(content, pageable);
+    public Page<Literature> findByAny(String queryStr, Pageable pageable) {
+        return literatureRepository.findByAny(queryStr, pageable);
+    }
+
+    @Override
+    public Page<Literature> findAll(Pageable pageable) {
+        return literatureRepository.findAll(pageable);
     }
 }
