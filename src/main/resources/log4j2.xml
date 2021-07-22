@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" monitorInterval="30" package="com.llg">
+    <Properties>
+        <Property name="App">literature</Property>
+        <Property name="logDir">logs</Property>
+        <Property name="splitSize">30 MB</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 存储所有error信息 -->
+        <RollingRandomAccessFile name="errorLog" fileName="${logDir}/${App}-error.log" immediateFlush="false"
+                                 filePattern="${logDir}/$${date:yyyy-MM}/${App}-error-%d{MM-dd-yyyy}-%i.log.gz"
+                                 append="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} [%t] %-5level %logger{36} %L %M - %msg%xEx%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="6" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="${splitSize}"/>
+            </Policies>
+            <Filters>
+                <!-- 只记录error级别信息 -->
+                <ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <!-- 指定每天的最大压缩包个数，默认7个，超过了会覆盖之前的 -->
+            <DefaultRolloverStrategy max="50"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- root logger 配置,全局配置，默认所有的Logger都继承此配置 -->
+        <Root level="warn">
+            <AppenderRef ref="File"/>
+        </Root>
+
+        <!--第三方的软件日志级别 -->
+        <logger name="org.springframework" level="info" additivity="true">
+        </logger>
+
+    </Loggers>
+</Configuration>
