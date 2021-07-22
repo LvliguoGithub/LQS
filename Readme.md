@@ -21,6 +21,23 @@ GET /_analyze
 6. location /    # 任何没有匹配成功的，都会匹配这里处理
 ~~~
 
+### windows命令
+~~~
+netstat -ano | findstr "10000"
+
+tasklist | findstr "nginx"
+
+taskkill /PID 进程号 -F -T
+tasklist /?
+tasklist /FI "PID eq 4"
+
+start nginx
+nginx -s stop
+nginx -s quit
+nginx -s reload
+~~~
+
+
 ## 资料
 react： https://docs.microsoft.com/zh-cn/visualstudio/javascript/tutorial-nodejs-with-react-and-jsx?view=vs-2019
 
