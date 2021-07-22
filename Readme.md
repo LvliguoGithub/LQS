@@ -11,6 +11,16 @@ GET /_analyze
 }
 ~~~
 
+### nginx配置
+~~~
+1. location =    # 精准匹配
+2. location ^~   # 带参前缀匹配
+3. location ~    # 正则匹配（区分大小写）
+4. location ~*   # 正则匹配（不区分大小写）
+5. location /a   # 普通前缀匹配，优先级低于带参数前缀匹配。
+6. location /    # 任何没有匹配成功的，都会匹配这里处理
+~~~
+
 ## 资料
 react： https://docs.microsoft.com/zh-cn/visualstudio/javascript/tutorial-nodejs-with-react-and-jsx?view=vs-2019
 
