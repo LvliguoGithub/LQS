@@ -3,6 +3,8 @@ import 'antd/dist/antd.css';
 import './index.css';
 import { List, Typography, Pagination } from 'antd';
 
+import LqItem from './lq-item';
+
 
 function LqList(props) {
   const [current, setCurrent] = useState(1);
@@ -18,7 +20,7 @@ function LqList(props) {
           dataSource={props.data.content}
           renderItem={item => (
             <List.Item>
-              <Typography.Text mark>{item.id}</Typography.Text> {item.ltName}
+              <LqItem item = {item}/>
             </List.Item>
           )}
         />,
