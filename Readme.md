@@ -21,6 +21,13 @@ GET /_analyze
 4. location ~*   # 正则匹配（不区分大小写）
 5. location /a   # 普通前缀匹配，优先级低于带参数前缀匹配。
 6. location /    # 任何没有匹配成功的，都会匹配这里处理
+
+server {
+  root D:/space/project/LQS-master/build;
+	location / {
+			try_files $uri $uri/ /index.html;
+	}
+}
 ~~~
 
 ### windows命令
