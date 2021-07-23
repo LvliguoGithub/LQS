@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Space } from 'antd';
+import { Button, Input, Space } from 'antd';
 import result from "./web-api/get-search-data";
 
 import LtList from './lt-list';
@@ -16,13 +16,18 @@ function SearchTool() {
     } 
     
     return (
-        <div>
-            <div className="srearch-tool" style="width:1800">
-                <Space direction="vertical">
-                    <Search placeholder="input search text" onSearch={getSearchData} enterButton style={{ width: 1000 }}/>
+        <div className="srearch-tool">
+            <Space direction="vertical">
+                <Search placeholder="输入搜索的内容" onSearch={getSearchData} enterButton style={{ width: 600 }}/>
+                <Space>
+                    <Button type="primary">文献/出版物</Button>
+                    <Button type="primary">作者</Button>
+                    <Button type="primary">机构</Button>
+                    <Button type="primary">问题</Button>
+                    <Button type="primary">方法/成果</Button>
                 </Space>
-            </div>
-            <LtList data={data}/>
+                <LtList data={data}/>
+            </Space>
         </div>
         );
 }
