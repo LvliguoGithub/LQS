@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input, Space } from 'antd';
 import result from "./web-api/get-search-data";
 
-import LqList from './lq-list';
+import LtList from './lt-list';
 
 import './search-tool.css';
 
@@ -11,21 +11,18 @@ function SearchTool() {
     const { Search } = Input;
 
     const getSearchData = async function(value){
-        console.log(value);
         const data = await result.getSearchData(value);
-        console.log(data);
-        
         setData(data);
     } 
     
     return (
         <div>
-            <div className="srearch-tool">
+            <div className="srearch-tool" style="width:1800">
                 <Space direction="vertical">
-                    <Search placeholder="input search text" onSearch={getSearchData} enterButton style={{ width: 400 }}/>
+                    <Search placeholder="input search text" onSearch={getSearchData} enterButton style={{ width: 1000 }}/>
                 </Space>
-            </div>,
-            <LqList data={data}/>
+            </div>
+            <LtList data={data}/>
         </div>
         );
 }
