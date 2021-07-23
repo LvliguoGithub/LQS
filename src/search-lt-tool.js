@@ -25,15 +25,13 @@ function SearchLtTool() {
 
     return (
         <Space align="start" size="large">
-            <div>
-                <div className="srearch-tool">
-                    <Space direction="vertical">
-                        <Search placeholder="输入搜索内容" onSearch={getSearchData} enterButton style={{ width: 400 }}/>
-                        <LtList data={data}/>
-                    </Space>
-                </div>
+            <div className="srearch-tool">
+                <Space direction="vertical">
+                    <Search placeholder="输入搜索内容" onSearch={getSearchData} enterButton style={{ width: 400 }}/>
+                    <LtList data={data}/>
+                </Space>
             </div>
-            
+
             <Space direction="vertical">
                 <Title level={3}>筛选条件</Title>
                 <Card size="small" title="年份" style={{ width: 300 }}>
