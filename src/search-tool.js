@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Input, Space } from 'antd';
 import result from "./web-api/get-search-data";
 
 import LtList from './lt-list';
 
 import './search-tool.css';
+import { useHistory } from 'react-router-dom';
 
-function SearchTool() {
+function SearchTool(props) {
     const [data, setData] = useState({content: [], totalPages: 0});
+    const history = useHistory();
     const { Search } = Input;
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await result.getSearchData("search/hot-lt");
+            setData(data);
+        };
+
+        fetchData();
+    }, []);
+
     const getSearchData = async function(value){
-        const data = await result.getSearchData(value);
-        setData(data);
+        // todo 判断空
+        history.push('/search?query=' + value);
     } 
     
     return (
@@ -26,11 +37,10 @@ function SearchTool() {
                     <Button type="primary">问题</Button>
                     <Button type="primary">方法/成果</Button>
                 </Space>
-                <LtList data={data}/>
+                <LtList data={data} />
             </Space>
         </div>
         );
 }
 
 export default SearchTool;
-

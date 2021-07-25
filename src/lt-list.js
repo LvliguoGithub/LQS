@@ -1,36 +1,57 @@
-import React, { useState } from 'react';
-import { Button, Input, Space } from 'antd';
-import result from "./web-api/get-search-data";
+import React from 'react';
+import 'antd/dist/antd.css';
+import './index.css';
+import { List, Typography, Space, Button } from 'antd';
+import { StarOutlined, WechatOutlined } from '@ant-design/icons';
+function LtItem(props) {
 
-import LtList from './lt-list';
+    const { Text, Link,Paragraph } = Typography;
+    const href = "/lt-detail/" + props.item.id;
+    const ellipsis = {rows:2}
 
-import './search-tool.css';
+    const space =  props.space=='null' ? '' : <Space>
+    <Text>阅读数量: {0}</Text>
+    <Text>推荐数量: {0}</Text>
+    <Text>成熟度</Text>
+    <Button icon={<StarOutlined/>}>收藏</Button>
+    <Button icon={<WechatOutlined/>}>微信分享</Button>
+  </Space>;
 
-function SearchTool() {
-    const [data, setData] = useState({content: [], totalPages: 0});
-    const { Search } = Input;
-
-    const getSearchData = async function(value){
-        const data = await result.getSearchData(value);
-        setData(data);
-    } 
-    
-    return (
-        <div className="srearch-tool">
-            <Space direction="vertical">
-                <Search placeholder="输入搜索的内容" onSearch={getSearchData} enterButton style={{ width: 600 }}/>
-                <Space>
-                    <Button type="primary">文献/出版物</Button>
-                    <Button type="primary">作者</Button>
-                    <Button type="primary">机构</Button>
-                    <Button type="primary">问题</Button>
-                    <Button type="primary">方法/成果</Button>
-                </Space>
-                <LtList data={data}/>
-            </Space>
-        </div>
-        );
+  return (
+  <Space direction="vertical" size={1}>
+      <Link href={href} target="_blank">{props.item.ltName}</Link>
+      <Space >
+        <Text type="secondary">发布时间</Text>
+        <Text type="secondary">发刊的期刊来源</Text>
+        <Text>DOI</Text>
+      </Space>
+      <Text>{props.item.authors}</Text>
+      <Paragraph ellipsis={ellipsis}>{props.item.ltDigest}</Paragraph>
+      {/*  */}
+      <div>{space}</div>
+  </Space>);
 }
 
-export default SearchTool;
+function LtList(props) {
+  const pageSize = props.pageSize || 10
+  const paginationData = { hideOnSinglePage: true, defaultPageSize:pageSize, total:props.data.totalElements }
 
+    return (
+    <>
+        <List
+          split={ false }
+          pagination={ paginationData }
+          dataSource={props.data.content}
+          renderItem={item => (
+            <List.Item>
+                <Typography style={{ width: 1000 }}>
+                    <LtItem item = {item} space={props.space}/>
+                </Typography>
+            </List.Item>
+          )}
+        />,
+    </>
+    );
+}
+
+export default LtList;

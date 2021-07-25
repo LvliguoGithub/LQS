@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Checkbox, DatePicker, Input, Rate, Space, Typography } from 'antd';
 import result from "./web-api/get-search-data";
 
@@ -9,17 +9,28 @@ import LtDetail from './lt-detail';
 
 import './search-tool.css';
 
-function SearchLtTool() {
+function SearchLtTool(props) {
     const [data, setData] = useState({content: [], totalPages: 0});
     const { Search } = Input;
     const { Title } = Typography;
     const { RangePicker } = DatePicker;
+    const searchVal= props.location.search;
+    const inputValue = searchVal.substring(searchVal.indexOf('=') + 1);
 
     const accessOptions = ['公开', '私人', '预印版'];
     const contentOptions = ['论文', '书籍', '早期引用'];
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await result.getSearchData("search" + props.location.search);
+            setData(data);
+        };
+
+        fetchData();
+    }, []);
+
     const getSearchData = async function(value){
-        const data = await result.getSearchData(value);
+        const data = await result.getSearchData("search?query=" + value);
         setData(data);
     } 
 
@@ -27,7 +38,7 @@ function SearchLtTool() {
         <Space align="start" size="large">
             <div className="srearch-tool">
                 <Space direction="vertical">
-                    <Search placeholder="输入搜索内容" onSearch={getSearchData} enterButton style={{ width: 400 }}/>
+                    <Search placeholder="输入搜索内容" defaultValue={inputValue} onSearch={getSearchData} enterButton style={{ width: 600 }}/>
                     <LtList data={data}/>
                 </Space>
             </div>
