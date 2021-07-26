@@ -3,6 +3,7 @@
 - 用户认证，两步走：1.在web中认证  2.增加网关能力，在网关中认证
 - 页面详情展示，防用户拷贝设置。阅读器
 - pdf读取内容
+- SSL认证加密传输
 
 ## 技巧
 ### 分析词汇
@@ -47,6 +48,15 @@ nginx -s quit
 nginx -s reload
 ~~~
 
+### lua
+**Lua协程知识点**
+~~~
+1. 在一个worker进程中，同一时刻只有一个协程运行。
+2. 协程遇到I/O操作时会被挂起，I/O操作完成后被唤醒继续操作。
+~~~
+
+### markdown
+**流程图graph** https://fibncci.github.io/2020/01/markdown-flow/
 
 ## 资料
 react： https://docs.microsoft.com/zh-cn/visualstudio/javascript/tutorial-nodejs-with-react-and-jsx?view=vs-2019
