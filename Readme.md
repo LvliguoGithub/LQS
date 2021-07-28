@@ -32,6 +32,24 @@ server {
 }
 ~~~
 
+限制请求、并发、速度
+~~~
+http {
+limit_req_zone $binary_remote_addr zone=NAME:10m rate=1r/s;
+limit_conn_zone $binary_remote_addr zone=NAME:10m;
+
+server {
+	location / { 
+		limit_req zone=NAME burst=5; 
+		}
+	location /download/ { 
+		limit_conn NAME 1;
+		limit_rate 100k;
+		}
+	}
+}
+~~~
+
 ### windows命令
 ~~~
 netstat -ano | findstr "10000"
