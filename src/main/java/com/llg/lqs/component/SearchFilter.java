@@ -1,4 +1,4 @@
-package com.llg.literature.component;
+package com.llg.lqs.component;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

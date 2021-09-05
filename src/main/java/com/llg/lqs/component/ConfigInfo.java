@@ -1,4 +1,4 @@
-package com.llg.literature.component;
+package com.llg.lqs.component;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
