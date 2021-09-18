@@ -11,6 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
 @RestController
 @RequestMapping("/backend")
 class SearchController {
@@ -40,5 +44,15 @@ class SearchController {
     public Page<Literature> findAll() {
         PageRequest pageRequest = PageRequest.of(0, 5);
         return literatureService.findAll(pageRequest);
+    }
+
+    @PostMapping("/import/excel")
+    public String importExcel(String path) throws Exception {
+//        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+//        MultipartFile file = multipartRequest.getFile("filename");
+//        File file = new File(path);
+        File file = new File("F:\\workspace\\文库搜索\\excel\\7BA1DF10.xlsx");
+        InputStream inputStream = new FileInputStream(file);
+        return literatureService.importExcel(inputStream, "论文数据.xlsx");
     }
 }

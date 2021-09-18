@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface LiteratureRepository extends ElasticsearchRepository<Literature, String> {
 
     @Query("{\"multi_match\": {\"query\": \"?0\", \"fields\": [" +
-            "\"lt_name\", \"lt_content\", \"authors\", \"comments\", \"country\", \"lt_describ\", \"journals\", \"unit\", \"lt_range\"]}}")
+            "\"lt_name\", \"lt_digest\", \"lt_content\", \"authors\", \"comments\", \"country\", \"lt_describ\", \"journals\", \"unit\", \"lt_range\"]}}")
     Page<LiteratureVo> findByAny(String queryStr, Pageable pageable);
 }
