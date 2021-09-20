@@ -4,9 +4,7 @@ import com.llg.lqs.dao.LiteratureRepository;
 import com.llg.lqs.entity.Literature;
 import com.llg.lqs.service.LiteratureService;
 import com.llg.lqs.util.ExcelUtil;
-import com.llg.lqs.vo.LiteratureVo;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service("literatureService")
@@ -24,7 +21,7 @@ public class LiteratureServiceImpl implements LiteratureService {
     private LiteratureRepository literatureRepository;
 
     @Override
-    public Page<LiteratureVo> findByAny(String queryStr, Pageable pageable) {
+    public Page<Literature> findByAny(String queryStr, Pageable pageable) {
         return literatureRepository.findByAny(queryStr, pageable);
     }
 
@@ -34,7 +31,7 @@ public class LiteratureServiceImpl implements LiteratureService {
     }
 
     @Override
-    public Literature findById(String id) {
+    public Literature findById(Long id) {
         return literatureRepository.findById(id).get();
     }
 
@@ -60,7 +57,7 @@ public class LiteratureServiceImpl implements LiteratureService {
             builder.doi(getStringCellValue(row.get(10)));
             builder.authors(getStringCellValue(row.get(11)));
             builder.project(getStringCellValue(row.get(12)));
-            builder.journals(getStringCellValue(row.get(13)));
+//            builder.journals(getStringCellValue(row.get(13)));
             builder.referenceAmount(getIntCellValue(row.get(14)));
             builder.recommendedAmount(getIntCellValue(row.get(15)));
             builder.sharedAmount(getIntCellValue(row.get(16)));

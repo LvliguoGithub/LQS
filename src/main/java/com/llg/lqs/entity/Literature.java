@@ -1,80 +1,81 @@
 package com.llg.lqs.entity;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Document(indexName = "literature")
+@Entity
+@Table(name="literature")
 public class Literature {
 
     @Id
-    private String id;
+    @Column(name = "id")
+    @GeneratedValue
+    private Long id;
 
-    @Field("lt_name")
+    @Column(name = "lt_name")
     private String ltName;
 
-    @Field("lt_type")
+    @Column(name = "lt_type")
     private String ltType;
 
-    @Field("lt_range")
+    @Column(name = "lt_range")
     private String ltRange;
 
-    @Field("lt_readability")
+    @Column(name = "lt_readability")
     private String ltReadability;
 
-    @Field(name = "publication_time")
+    @Column(name = "publication_time")
     private Date publicationTime;
 
-    @Field("country")
+    @Column(name = "country")
     private String country;
 
-    @Field("unit")
+    @Column(name = "unit")
     private String unit;
 
-    @Field("unit_category")
+    @Column(name = "unit_category")
     private String unitCategory;
 
-    @Field("doi")
+    @Column(name = "doi")
     private String doi;
 
-    @Field("authors")
+    @Column(name = "authors")
     private String authors;
 
-    @Field("project")
+    @Column(name = "project")
     private String project;
 
-    @Field("journals")
+    @Column(name = "journals")
     private String journals;
 
-    @Field("reference_amount")
+    @Column(name = "reference_amount")
     private Integer referenceAmount;
 
-    @Field("recommend_amount")
+    @Column(name = "recommended_amount")
     private Integer recommendedAmount;
 
-    @Field("shared_amount")
+    @Column(name = "shared_amount")
     private Integer sharedAmount;
 
-    @Field("readed_amount")
+    @Column(name = "readed_amount")
     private Integer readedAmount;
 
-    @Field("img_url")
+    @Column(name = "img_url")
     private String imgUrl;
 
-    @Field("lt_desc")
+    @Column(name = "lt_desc")
     private String ltDesc;
 
-    @Field("comments")
+    @Column(name = "comments")
     private String comments;
 
-    @Field("lt_digest")
+    @Column(name = "lt_digest")
     private String ltDigest;
 
-    @Field("lt_content")
+    @Column(name = "lt_content")
     private String ltContent;
 
     public Literature() {

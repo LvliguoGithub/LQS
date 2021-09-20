@@ -1,10 +1,9 @@
 package com.llg.lqs.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.llg.lqs.component.SearchFilter;
 import com.llg.lqs.entity.Literature;
 import com.llg.lqs.service.LiteratureService;
-import com.llg.lqs.vo.LiteratureVo;
-import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,17 +25,17 @@ class SearchController {
     private LiteratureService literatureService;
 
     @GetMapping("/search")
-    public Page<LiteratureVo> search(@RequestParam("query") String queryStr) {
-        if (StringUtil.isNullOrEmpty(queryStr)) {
+    public Page<Literature> search(@RequestParam("query") String queryStr) {
+        if (StringUtils.isEmpty(queryStr)) {
             return Page.empty();
         }
         String content = searchFilter.filterSearchContent(queryStr);
-        Page<LiteratureVo> page = literatureService.findByAny(content, Pageable.unpaged());
+        Page<Literature> page = literatureService.findByAny(content, Pageable.unpaged());
         return page;
     }
 
     @GetMapping("/search/{id}")
-    public Literature findById(@PathVariable("id") String id) {
+    public Literature findById(@PathVariable("id") Long id) {
         return literatureService.findById(id);
     }
 
