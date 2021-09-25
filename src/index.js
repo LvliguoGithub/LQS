@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import LtDetail from './lt-detail';
-import SearchLtTool from './search-lt-tool';
+import { ConfigProvider } from 'antd';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import locale from 'antd/lib/date-picker/locale/en_US';
+
+moment.locale('zh-cn');
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <ConfigProvider locale={locale}>
+      <App/>
+    </ConfigProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

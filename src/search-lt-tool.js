@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Checkbox, DatePicker, Input, Rate, Space, Typography } from 'antd';
 import result from "./web-api/get-search-data";
+import './App.css';
 
 import LtList from './lt-list';
-
-// TODO test code
-import LtDetail from './lt-detail';
+import { useHistory } from 'react-router-dom';
 
 import './search-tool.css';
 
@@ -19,8 +18,9 @@ function SearchLtTool(props) {
 
     const accessOptions = ['公开', '私人', '预印版'];
     const contentOptions = ['论文', '书籍', '早期引用'];
+    const history = useHistory();
 
-    useEffect(() => {
+    useEffect(() => {    
         const fetchData = async () => {
             const data = await result.getSearchData("search" + props.location.search);
             setData(data);
@@ -30,13 +30,12 @@ function SearchLtTool(props) {
     }, []);
 
     const getSearchData = async function(value){
-        const data = await result.getSearchData("search?query=" + value);
-        setData(data);
+        history.push('/search?query=' + value);
     } 
 
     return (
         <Space align="start" size="large">
-            <div className="srearch-tool">
+            <div className="srearch-tool" class="app-searh">
                 <Space direction="vertical">
                     <Search placeholder="输入搜索内容" defaultValue={inputValue} onSearch={getSearchData} enterButton style={{ width: 600 }}/>
                     <LtList data={data}/>

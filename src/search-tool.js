@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Input, Space } from 'antd';
-import result from "./web-api/get-search-data";
-
-import LtList from './lt-list';
 
 import './search-tool.css';
 import { useHistory } from 'react-router-dom';
 
 function SearchTool(props) {
-    const [data, setData] = useState({content: [], totalPages: 0});
     const history = useHistory();
     const { Search } = Input;
 
     useEffect(() => {
-        const fetchData = async () => {
-            const data = await result.getSearchData("search/hot-lt");
-            setData(data);
-        };
 
-        fetchData();
     }, []);
 
     const getSearchData = async function(value){
@@ -27,18 +18,19 @@ function SearchTool(props) {
     } 
     
     return (
-        <div className="srearch-tool">
-            <Space direction="vertical">
-                <Search placeholder="输入搜索的内容" onSearch={getSearchData} enterButton style={{ width: 600 }}/>
-                <Space>
-                    <Button type="primary">文献/出版物</Button>
-                    <Button type="primary">作者</Button>
-                    <Button type="primary">机构</Button>
-                    <Button type="primary">问题</Button>
-                    <Button type="primary">方法/成果</Button>
+        <div class="home-page">
+            <div className="srearch-tool" id="home-page">
+                <Space direction="vertical" align="center">
+                    <Search placeholder="输入搜索的内容" onSearch={getSearchData} enterButton style={{ width: 600 }}/>
+                    <Space>
+                        <Button type="primary">文献/出版物</Button>
+                        <Button type="primary">作者</Button>
+                        <Button type="primary">机构</Button>
+                        <Button type="primary">问题</Button>
+                        <Button type="primary">方法/成果</Button>
+                    </Space>
                 </Space>
-                <LtList data={data} />
-            </Space>
+            </div>
         </div>
         );
 }

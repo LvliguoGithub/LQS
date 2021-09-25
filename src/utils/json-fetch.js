@@ -3,6 +3,7 @@ import pickQuery from "./pick-query"; // eslint-disable-next-line
 const JsonFetch = {
     get: (url,query = {}) => {
         return new Promise((resolve,reject) => {
+            console.log(url)
             fetch(url + pickQuery(query),{
                 method:"GET",
             }).then(res =>{
